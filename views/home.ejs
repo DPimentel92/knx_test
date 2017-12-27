@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KNX Remote Control</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<header class="jumbotron">
+    <div class="container">
+        <h1>KNX Remote Controler</h1>
+    	<p>
+            <a class="btn btn-primary btn-large" href="/campgrounds/new">Start Video Streaming</a>
+        </p>
+    </div>
+</header>
+
+<div class="container">
+	<div class="row text-center">
+		<% images.forEach(function(images){ %>
+			<div class="col-md-4 col-sm-6">
+                <div>
+                    <h3></4><%= images.description %></h3>
+                    <img src="<%= images.src %>" height="300" width="300">
+                    <p><%= images.name %></p>
+                    <% if(images.index == 8 || images.index == 2 || images.index == 2){ %>
+                        <p>Programado</p>
+                    <% } else { %>
+                        <div>
+                            <form action="/api/knx/test" method="POST">
+                                    <input class="form-control"  type="text" name="area" placeholder="area">
+                                    <input class="form-control"  type="text" name="room" placeholder="room">
+                                    <input class="form-control"  type="text" name="description" placeholder="description">
+                                    <input class="form-control"  type="text" name="destination" placeholder="destination">
+                                    <input type="hidden" name="index" value=<%= images.index %>>
+                                    <input type="hidden" name="name" value=<%= images.name %>>
+                                    <p></p>
+                                    <button class="btn btn-lg btn-primary btn-block">Submeter Botão <%= images.index + 1 %> </button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            </div> 
+		<% }); %>
+		
+	</div>
+</div>
+
+
+
+</body>
+</html>
